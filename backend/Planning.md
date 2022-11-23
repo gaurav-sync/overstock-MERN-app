@@ -46,4 +46,45 @@
 
 
 
+```
+//user object
+
+{
+    userid: xyzzzzzzzzzzz,
+    name: gaurav,
+    password: pass@123,
+    cart_id: abcdef,
+    history_id: 12345678
+}
+
+
+//cart object
+{
+    cart_id: abcdef,
+    user_id: xyzzzzzzzzzzz,
+    product_id: [aaaaaaaaa, bbbbbbbbbb, cccccccc]
+}
+
+
+
+
+```
+
+# OR
+
+```
+// user object 
+
+{
+{
+    userid: xyzzzzzzzzzzz,
+    name: gaurav,
+    password: pass@123,
+    cart: [aaaaaa, bbbbb, cccccc],          //product ides
+    history: [aaaaa, bbbbbb]              // product ides
+}
+}
+
+
+```
 
