@@ -1,7 +1,6 @@
 {
   "User": [
     {
-<<<<<<< HEAD
       "email": "gdh",
       "password": "254",
       "id": 1
@@ -20,7 +19,10 @@
       "email": "raj@test.com",
       "password": "123",
       "id": 4
-=======
+    }],
+
+    "products":[
+      {
       "position": 1,
       "category": "furniture",
       "product_id": "311171946",
@@ -3891,7 +3893,6 @@
       "pickup": {
         "free_ship_to_store": true
       }
->>>>>>> 79de5f72502902f3fbebc5b05f57315d6a52aacd
     }
   ]
 }

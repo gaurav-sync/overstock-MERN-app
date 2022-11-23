@@ -1,8 +1,9 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const userModel = require("../models/user.models.js");
+require('dotenv').config()
 
-const JWT_SECRET = "";
+const JWT_SECRET = process.env.JWT_SECRET;
 
 function generateToken(user) {
     return jwt.sign({
@@ -16,6 +17,7 @@ function generateToken(user) {
 
 async function login(req, res) {
 
+   try{
     const user = req.body;
 
     let {email, password} = user;
@@ -50,38 +52,52 @@ async function login(req, res) {
             message: 'User does not exist with the given email'
         })
     }
+   }catch(err){
+    return res.status(400).send({
+        status: 'error',
+        data: "Invalid Credientials"
+    })
+   }
 }
 
 
 async function register(req, res) {
-    const user = req.body;
+    try{
+        const user = req.body;
 
-    let {name, email, password} = user;
-
-    let existingUser = await userModel.findOne({
-        email
-    })
-
-    if (existingUser) {
+        let {name, email, password} = user;
+    
+        let existingUser = await userModel.findOne({
+            email
+        })
+    
+        if (existingUser) {
+            return res.status(400).send({
+                status: 'error',
+                message: 'User already exists with the given email'
+            })
+        } else {
+            password = bcrypt.hashSync(password);
+            let user = await userModel.create({
+                name, email, password
+            })
+    
+            user = user.toJSON();
+    
+            delete user.password;
+    
+            return res.status(200).send({
+                status: 'success',
+                data: user
+            })
+        }
+    }catch(err){
         return res.status(400).send({
             status: 'error',
-            message: 'User already exists with the given email'
-        })
-    } else {
-        password = bcrypt.hashSync(password);
-        let user = await User.create({
-            name, email, password
-        })
-
-        user = user.toJSON();
-
-        delete user.password;
-
-        return res.status(200).send({
-            status: 'success',
-            data: user
+            data: "Invalid Credientials"
         })
     }
+    
 }
 
 
