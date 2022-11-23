@@ -1,0 +1,433 @@
+.hovered {
+  display: none;
+}
+
+.heading {
+  font-size: 24px;
+  font-weight: 400;
+  margin: 10px;
+  text-align: left;
+}
+
+.box2 h1 {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.parent {
+  display: flex;
+}
+
+.parent div {
+  margin: 8px;
+}
+
+.box1 div img {
+  width: 100%;
+}
+
+.box1 {
+  box-sizing: border-box;
+  padding: 10px;
+  display: flex;
+  /* justify-content: flex-start; */
+  /* width: 70%; */
+  gap: 20px;
+  border: 1px solid #cecece;
+}
+
+.box2 {
+  width: 40%;
+}
+
+.red {
+  color: #c7202c !important;
+  font-size: 18px;
+}
+
+.selected {
+  border: 1px solid black;
+  width: 40%;
+}
+
+.red + p {
+  margin-top: -6px;
+}
+
+.capucion {
+  font-size: 6px;
+}
+
+.parent2 {
+  display: flex;
+  width: 70%;
+}
+
+.parent2 div {
+  width: 100%;
+}
+
+.parent2 div img {
+  width: 100%;
+}
+
+.parent2 div {
+  margin: 10px;
+}
+
+.parent2 div button {
+  width: 100%;
+  justify-content: center;
+  padding: 12px;
+  border-radius: 5px;
+  background-color: white;
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.parent2 div h3 {
+  color: #c7202c !important;
+  font-size: 15px;
+  margin-bottom: none;
+}
+
+.parent2 div p {
+  margin-top: -12px;
+}
+
+.innerBox,
+.innerBox2 {
+  text-align: left;
+}
+
+.innerBox :first-child button {
+  border: none;
+  background-color: white;
+}
+.innerBox h2 {
+  /* padding: 5px 10px; */
+  margin: 15px 0 0px -10px;
+}
+
+.box2_main2 div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.box2 div svg {
+  margin-top: 17px;
+  margin-left: 5px;
+  margin-right: 6px;
+}
+
+.navbar {
+  height: 70px;
+}
+
+.box2 button {
+  width: 100%;
+  align-items: center;
+  background-color: #2f3337;
+  color: white;
+  padding: 13px;
+  font-size: 13px;
+}
+
+.cl-icon {
+  margin-bottom: 300px;
+}
+
+.cl-icon {
+  width: 10;
+}
+
+.promo {
+  margin-left: 10px;
+}
+
+.parent svg {
+  margin-left: 10px;
+}
+
+.parent span {
+  margin-left: 10px;
+}
+
+.box2_main2 {
+  margin-top: 30px;
+  border: 1px solid #cecece;
+  padding: 20px;
+}
+
+.paragraph {
+  color: #c7202c;
+}
+
+.parent h5 + h5 {
+  margin-left: 40px;
+}
+
+/* .parent p + p {
+  margin-left: 40px;
+} */
+.navbar .overstocklogo svg {
+  margin: 20px 60px 60px 0px;
+  height: 35px;
+  width: 180px;
+}
+
+.cl-icon {
+  margin-top: 23px;
+  height: 25px;
+  width: 30px;
+  margin-right: 60px;
+}
+
+.main {
+  display: flex;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-around;
+}
+
+.express_checkout {
+  /* border: 1px solid black; */
+  height: 100px;
+}
+
+.express_checkout {
+  width: 60%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.express_checkout div button {
+  width: 300px;
+  height: 50px;
+}
+
+.express_checkout image {
+  border: 1px solid black;
+  width: 100%;
+}
+
+.main div {
+  margin: 30px;
+}
+
+.form {
+  margin-top: -250px;
+  margin-left: 150px;
+
+  width: 51%;
+}
+
+.form input {
+  padding: 15px;
+  margin: 10px 0 10px 0;
+}
+
+.form input {
+  width: 43%;
+}
+
+.express_checkout img {
+  width: 200px;
+}
+
+.first {
+  background-color: bisque;
+}
+
+.express-button-content1 {
+  background-color: antiquewhite;
+}
+
+.button1 {
+  background-color: beige;
+}
+
+.line2 {
+  margin-left: 10px;
+  width: 215%;
+}
+
+.chkbox div {
+  margin: 10px;
+}
+
+.parent tr,
+th {
+  margin: 30px;
+}
+
+.marginTop {
+  margin-top: 180px;
+  /* margin-left: 20px; */
+}
+
+.box1 p {
+  text-align: left;
+}
+
+.box2_main1 {
+  border: 1px solid #cecece;
+  padding: 10px;
+  /* padding-left: 30px; */
+  /* padding-right: 30px; */
+}
+
+.main2 {
+  width: 50%;
+  margin-left: 156px;
+}
+
+.anotherheading {
+  margin-left: 9px;
+}
+
+.card_number {
+  border: 1px solid black;
+  width: 60%;
+  padding: 13px;
+}
+
+.card_number input {
+  padding: 15px;
+  width: 90%;
+}
+
+.dob {
+  display: flex;
+  margin-top: 20px;
+}
+
+.dob span {
+  width: 25%;
+  padding: auto;
+}
+
+.dob select {
+  padding: 15px;
+}
+
+.financing_header {
+  margin-top: 20px;
+  border: 1px solid black;
+  width: 55%;
+  padding: 30px;
+  background-color: #f5f6f7;
+  margin-bottom: 20px;
+}
+
+.financing_header div {
+  margin: 4px;
+}
+
+.bottom_svg {
+  margin-top: 10px;
+}
+
+.separator {
+  border-top: 1px solid #dadcdf;
+  display: block;
+  margin: 24px 0;
+}
+
+.paypalmain_button {
+  background-color: #2f3337;
+  color: white;
+  width: 300px;
+  height: 80px;
+  font-size: 20px;
+  justify-content: center;
+  text-align: center;
+}
+
+.submit-button-icon {
+  background-color: white;
+  margin-bottom: 13px;
+}
+
+.os-btn-cl btn-cl-secondary btn-cl-lg express-paypal {
+  background-color: #c7202c;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.form {
+  margin-top: -300px;
+}
+
+.chhk123 {
+  margin-left: 500px;
+  margin-top: 23px;
+}
+
+.chhk123 h3 {
+  margin-bottom: 35px;
+}
+
+.navbar_2 {
+  display: flex;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.or-section {
+  border: 0;
+  font-size: 100%;
+  margin: 0;
+  outline: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+.or {
+  background: #fff;
+  color: #626669;
+  font-size: 14px;
+  font-weight: 400;
+  left: 50%;
+  margin-left: -23.5px;
+  padding: 0 16px;
+  position: absolute;
+  top: -8px;
+}
+
+.box1_Div2 * {
+  margin: 10px 0;
+}
+.btn-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.innerBox2 {
+  position: relative;
+  right: 10px;
+  top: 18px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.box2 {
+  position: relative;
+  top: -5px;
+}
+.box1_imageDiv {
+  width: 400px;
+}
+.box1_imageDiv img {
+  height: 280px;
+}

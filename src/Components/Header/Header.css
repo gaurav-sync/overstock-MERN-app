@@ -1,0 +1,382 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#header-container {
+  text-align: left;
+  position: fixed;
+  left: -15px;
+  top: 0;
+  z-index: 10;
+}
+body {
+  background-color: rgb(255, 255, 255);
+  /* width: 100%; */
+}
+#navbar {
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  margin-bottom: 30px;
+  background-color: white;
+}
+
+#nav_1 {
+  height: 30px;
+  border-bottom: 1px solid rgb(214, 214, 214);
+  background-color: rgb(249, 250, 251);
+}
+#dropDiv_1,
+#dropDiv_2,
+#dropDiv_3,
+#dropDiv_4,
+#dropDiv_5,
+#dropDiv_6,
+#dropDiv_7,
+#dropDiv_8,
+#dropDiv_9,
+#dropDiv_10,
+#dropDiv_11,
+#dropDiv_12,
+#dropDiv_13 {
+  padding: 6px 0;
+}
+#dropDiv_1:hover,
+#dropDiv_2:hover,
+#dropDiv_3:hover,
+#dropDiv_4:hover,
+#dropDiv_5:hover,
+#dropDiv_6:hover,
+#dropDiv_7:hover,
+#dropDiv_8:hover,
+#dropDiv_9:hover,
+#dropDiv_10:hover,
+#dropDiv_11:hover,
+#dropDiv_12:hover,
+#dropDiv_13:hover {
+  border-bottom: 2px solid;
+}
+#dropDiv_1:hover #drop_1 {
+  visibility: visible;
+}
+#dropDiv_2:hover #drop_2 {
+  visibility: visible;
+}
+#dropDiv_3:hover #drop_3 {
+  visibility: visible;
+}
+#dropDiv_4:hover #drop_4 {
+  visibility: visible;
+}
+#dropDiv_5:hover #drop_5 {
+  visibility: visible;
+}
+#dropDiv_6:hover #drop_6 {
+  visibility: visible;
+}
+#dropDiv_7:hover #drop_7 {
+  visibility: visible;
+}
+#dropDiv_8:hover #drop_8 {
+  visibility: visible;
+}
+#dropDiv_9:hover #drop_9 {
+  visibility: visible;
+}
+#dropDiv_10:hover #drop_10 {
+  visibility: visible;
+}
+#dropDiv_11:hover #drop_11 {
+  visibility: visible;
+}
+#dropDiv_12:hover #drop_12 {
+  visibility: visible;
+}
+#dropDiv_13:hover #drop_13 {
+  visibility: visible;
+}
+
+#dropDiv_13 {
+  color: rgb(206, 60, 70);
+}
+
+#brand_p {
+  font-weight: 700;
+  color: black;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-size: 17px;
+}
+
+#extraOff_p {
+  font-size: 20px;
+  color: black;
+  font-weight: 600;
+}
+
+#red_p {
+  color: rgb(235, 5, 5);
+  font-weight: 600;
+  line-height: 1.9;
+}
+#drop_1,
+#drop_2,
+#drop_3,
+#drop_4,
+#drop_5 {
+  visibility: hidden;
+  display: flex;
+  font-size: 15px;
+  letter-spacing: 1;
+  font-weight: 500;
+  color: rgb(66, 66, 66);
+  position: absolute;
+  top: 145px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 5000px 0px 5000px;
+  z-index: 2;
+  padding: 0 0 20px 40px;
+  background-color: white;
+}
+#drop_6,
+#drop_7,
+#drop_8,
+#drop_9,
+#drop_10,
+#drop_11,
+#drop_12,
+#drop_13 {
+  visibility: hidden;
+  display: flex;
+  font-size: 15px;
+  letter-spacing: 1;
+  font-weight: 500;
+  color: rgb(66, 66, 66);
+  position: absolute;
+  top: 145px;
+  right: 0px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 5000px 0px 5000px;
+  z-index: 2;
+  padding: 0 0 20px 40px;
+  background-color: white;
+}
+
+#drop_1 > div {
+  width: 250px;
+  line-height: 1.8;
+  background-color: rgb(255, 255, 255);
+}
+
+#drop_2 > div {
+  width: 180px;
+  background-color: rgb(255, 255, 255);
+  line-height: 1.9;
+  padding-left: 20px;
+}
+
+#drop_3 > div {
+  width: 220px;
+  line-height: 1.95;
+  background-color: rgb(255, 255, 255);
+  padding-left: 20px;
+}
+
+#drop_4 > div {
+  line-height: 1.95;
+  width: 220px;
+  background-color: rgb(255, 255, 255);
+  padding-left: 20px;
+}
+
+#drop_5 > div {
+  width: 200px;
+  background-color: rgb(255, 255, 255);
+  padding-left: 20px;
+  line-height: 1.95;
+}
+
+#drop_6 > div {
+  width: 220px;
+  line-height: 1.95;
+  background-color: rgb(255, 255, 255);
+  padding-left: 20px;
+}
+#drop_7 > div {
+  width: 220px;
+  line-height: 1.95;
+  background-color: rgb(255, 255, 255);
+  padding-left: 20px;
+}
+#drop_8 > div {
+  width: 220px;
+  line-height: 1.95;
+  background-color: rgb(255, 255, 255);
+  padding-left: 20px;
+}
+#drop_9 > div {
+  width: 220px;
+  line-height: 1.95;
+  background-color: rgb(255, 255, 255);
+  padding-left: 20px;
+}
+#drop_10 > div {
+  width: 220px;
+  line-height: 1.95;
+  background-color: rgb(255, 255, 255);
+  padding-left: 20px;
+}
+#drop_11 > div {
+  width: 220px;
+  line-height: 1.95;
+  background-color: rgb(255, 255, 255);
+  padding-left: 20px;
+}
+#drop_12 > div {
+  background-color: rgb(255, 255, 255);
+}
+#drop12_div1 {
+  background-color: rgb(255, 255, 255);
+  margin-top: 0%;
+}
+#drop_12 > div > p {
+  text-align: center;
+  font-weight: 600;
+  font-size: 20px;
+  margin-top: 0px;
+}
+#drop12_div {
+  display: flex;
+  gap: 20px;
+  margin-left: 20px;
+  background-color: rgb(255, 255, 255);
+  margin-top: 0%;
+}
+#drop12_div > div {
+  text-align: center;
+  font-weight: 500px;
+  border: 1px solid silver;
+  background-color: rgb(255, 255, 255);
+}
+
+#drop12_div > p {
+  margin-top: 0%;
+}
+
+#drop_12 img {
+  height: 130px;
+  margin-bottom: 0cm;
+}
+#drop13_div1 {
+  display: flex;
+  gap: 20px;
+  height: 80px;
+  width: 850px;
+  margin-left: 20px;
+  background-color: rgb(230, 228, 228);
+}
+#drop13_div1 div:nth-child(1) {
+  color: red;
+  font-size: 35px;
+  margin-left: 30px;
+  font-weight: 600;
+  justify-content: center;
+  text-align: center;
+}
+
+#drop13_div1 div:nth-child(1) p {
+  margin-top: 15px;
+}
+
+#drop13_div1 div:nth-child(2) {
+  color: black;
+  font-size: 25px;
+  margin-left: 40px;
+  font-weight: 600;
+}
+
+#drop13_div1 div:nth-child(3) {
+  color: black;
+  font-size: 25px;
+  margin-left: 40px;
+  font-weight: 600;
+  background-color: aliceblue;
+  height: 50px;
+  width: 150px;
+  text-align: center;
+  margin-top: 10px;
+}
+
+#drop13_div1 div:nth-child(3) p {
+  margin-top: 10px;
+}
+
+#drop13_div2 {
+  display: flex;
+  margin-top: 20px;
+  gap: 10px;
+  margin-left: 20px;
+}
+
+#drop13_div2 > div {
+  border: 1px solid silver;
+}
+
+#drop13_div2 > div > div > p {
+  letter-spacing: -0.5px;
+  font-size: 15px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  color: black;
+  font-weight: 500;
+}
+
+#account-hover {
+  visibility: hidden;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgb(66, 66, 66);
+  position: absolute;
+  top: 95px;
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 20px 50px 5px;
+  z-index: 2;
+  padding: 15px;
+  width: 200px;
+  background-color: white;
+}
+
+#accountDiv:hover #account-hover {
+  visibility: visible;
+}
+#menuDiv_hamburger {
+  display: none;
+}
+
+@media all and (min-width: 0px) and (max-width: 1023px) {
+  #nav_1 {
+    display: none;
+  }
+  #searchBox_Div {
+    display: none;
+  }
+  #navbar {
+    border-bottom: 1px solid #cecece;
+    height: 60px;
+    display: flex;
+    align-items: center;
+  }
+  #Navlinks_div {
+    display: none;
+  }
+  #accountDiv-Parent {
+    position: absolute;
+    right: 0;
+  }
+  #menuDiv_hamburger {
+    display: block;
+  }
+  #sortDropdown_Div {
+    position: relative;
+    left: -120px;
+  }
+}

@@ -1,0 +1,20 @@
+@media all and (min-width: 0px) and (max-width: 1023px) {
+  #signinDividerDiv {
+    display: none;
+    border: 1px solid;
+  }
+  #Heading_SignUp,
+  #Heading_SignIn {
+    text-align: center;
+  }
+  #signin_page {
+    position: relative;
+    top: -620px;
+    left: -40px;
+    padding: 0 40px;
+  }
+  #loginSignupDiv {
+    position: relative;
+    left: 40px;
+  }
+}

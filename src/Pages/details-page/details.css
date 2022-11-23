@@ -1,0 +1,17 @@
+.cartBtn{
+    background-color: #27865f;
+    color: white;
+    border:none;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.cartBtn:hover{
+    cursor: pointer;
+    background-color: #227553;
+}
+
+.itemQuantity{
+    border:1px solid #ccc;
+    border-radius: 4px;
+}
