@@ -8,7 +8,7 @@
 
 
 ## cart data
-### 
+
 - **/cart** --> cart id associated with every user 
 
 ```
