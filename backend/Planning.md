@@ -88,3 +88,14 @@
 
 ```
 
+
+
+## compulsion
+- limit = 9
+- page = params
+
+
+## not compulsion
+- sortby = price = asc or desc = params
+- categories = params
+- brands = params

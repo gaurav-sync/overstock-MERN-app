@@ -15,7 +15,7 @@ function generateToken(user) {
 }
 
 
-async function login(req, res) {
+const login = async(req, res)=> {
 
    try{
     const user = req.body;
@@ -61,7 +61,7 @@ async function login(req, res) {
 }
 
 
-async function register(req, res) {
+const register = async(req, res)=>{
     try{
         const user = req.body;
 
