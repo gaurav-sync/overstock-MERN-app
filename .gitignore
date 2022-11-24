@@ -26,6 +26,5 @@ yarn-error.log*
 .netlify
 
 
-.env
 
 node_modules
