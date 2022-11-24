@@ -24,30 +24,53 @@ const Login = () => {
   };
   const handleLogin = () => {
     setLoading(true);
-    fetch(`https://overstock-signup.herokuapp.com/User`)
-      .then((res) => res.json())
-      .then((data) => {
-        let filterData = data.filter((elm) => {
-          return (
-            elm.email == inputValues.email &&
-            elm.password === inputValues.password
-          );
-        });
-        if (filterData.length == 0) throw Error;
-        else {
-          succesFunction()();
-          dispatch(loginSignupSuccess());
-          navigate("/furniture");
-        }
-      })
-      .catch((error) => {
-        errorFunction()();
-        console.log(error);
-      })
-      .finally(() => {
+    // fetch(`https://overstock-signup.herokuapp.com/User`)
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     let filterData = data.filter((elm) => {
+    //       return (
+    //         elm.email == inputValues.email &&
+    //         elm.password === inputValues.password
+    //       );
+    //     });
+    //     if (filterData.length == 0) throw Error;
+    //     else {
+    //       succesFunction()();
+    //       dispatch(loginSignupSuccess());
+    //       navigate("/furniture");
+    //     }
+    //   })
+    //   .catch((error) => {
+    //     errorFunction()();
+    //     console.log(error);
+    //   })
+    //   .finally(() => {
+    //     setLoading(false);
+    //   });
+
+
+    fetch(`http://localhost:8080/login`,{
+      method: "POST",
+      body: JSON.stringify(inputValues),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    }).then((res)=>res.json()).then((res)=>{
+      if(res.data.token){
+            succesFunction()();
+            dispatch(loginSignupSuccess(res.data.token));
+            navigate("/furniture");
+      }else{
+            errorFunction()();
+      }
+    }).catch((err)=>{
+      errorFunction()();
+      console.log(err);
+    }).finally(() => {
         setLoading(false);
-      });
+    });
   };
+
   const { email, password } = inputValues;
   const succesFunction = () => {
     return () =>

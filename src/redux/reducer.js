@@ -17,7 +17,8 @@ const initState = {
   isAuth: false
 };
 
-if(window.localStorage.getItem("isAlreadyLogined")) {
+
+if(window.localStorage.getItem("token")) {
   initState.isAuth = true;
 }
 
@@ -66,14 +67,14 @@ export const reducer = (state = initState, { type, payload }) => {
       };
     }
     case LOGIN_SIGNUP_SUCCESS: {
-      window.localStorage.setItem("isAlreadyLogined",true);
+      window.localStorage.setItem("token",payload);
       return {
         ...state,
         isAuth: true
       }
     }
     case SIGNOUT_SUCCESS: {
-      window.localStorage.removeItem("isAlreadyLogined");
+      window.localStorage.removeItem("token");
       return {
         ...state,
         isAuth: false

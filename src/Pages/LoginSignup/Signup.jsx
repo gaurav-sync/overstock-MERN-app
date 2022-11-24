@@ -27,21 +27,41 @@ function Signup() {
   };
   const handleSignup = (body) => {
     setLoading(true);
-    fetch(`https://overstock-signup.herokuapp.com/User`, {
+    // fetch(`https://overstock-signup.herokuapp.com/User`, {
+    //   method: "POST",
+    //   body: JSON.stringify(body),
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    // })
+    //   .then(() => {
+    //     succesFunctionSignup()();
+    //     setInputValues({email: "", password: ""})
+    //     setConfPassword("");
+    //   })
+    //   .catch(() => errorFunctionSignup()())
+    //   .finally(() => setLoading(false));
+
+
+    fetch(`http://localhost:8080/register`,{
       method: "POST",
       body: JSON.stringify(body),
       headers: {
         "Content-Type": "application/json",
       },
-    })
-      .then(() => {
+    }).then((res)=>res.json()).then((res)=>{
+      if(res.status === "success"){
         succesFunctionSignup()();
-        setInputValues({email: "", password: ""})
+        setInputValues({email: "", password: ""});
         setConfPassword("");
-      })
-      .catch(() => errorFunctionSignup()())
+      }else{
+        errorFunctionSignup()();
+
+      }
+    }).catch(() => errorFunctionSignup()())
       .finally(() => setLoading(false));
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     handleSignup(inputValues);
