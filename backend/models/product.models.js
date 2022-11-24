@@ -19,7 +19,18 @@ const mongoose = require("mongoose")
     // delivery:{type: Object},
     // pickup: {type: Object}
 
-const productSchema = new mongoose.Schema({})
+const productSchema = new mongoose.Schema({
+    title:{
+        type:String,
+        require:true
+    },
+    category:String,  
+    brand:String,
+    description:String,    
+    price:Number,
+    rating:Number, 
+    reviews:Number
+})
 
 const product = mongoose.model('product', productSchema);
 
