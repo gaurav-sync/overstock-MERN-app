@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const Product = require("../models/Product.models.js");
+const Product = require("../models/product.models.js");
 
 const getdata = async (req, res) => {
   let {
