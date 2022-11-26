@@ -1,6 +1,6 @@
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
-const product = require("../models/product.models.js");
+const Product = require("../models/product.models.js");
 // require('dotenv').config()
 
 // const JWT_SECRET = process.env.JWT_SECRET;
@@ -10,7 +10,8 @@ const getdata = async (req, res) => {
   // console.log(category, "   ", brand)
   //   let data = [];
   // data = await product.find({$and:[{category:category},{brand:brand}]}).skip(0).limit(9)
-  let data = await product.find({ brand: "Costway" }).limit(2);
+  //   let data = await Product.find({ brand: "Costway" }).limit(2);
+  let data = await Product.find({ brand: "Costway" });
   // console.log(data)
 
   // if(sortby && order && category && brand){
@@ -29,9 +30,7 @@ const getdata = async (req, res) => {
 
   res.status(200).send({
     status: "success",
-    data: {
-      data,
-    },
+    data,
   });
 };
 
