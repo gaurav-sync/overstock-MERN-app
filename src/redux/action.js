@@ -6,7 +6,7 @@ import {
   REMOVE_FROM_CART,
   LOGIN_SIGNUP_SUCCESS,
   SIGNOUT_SUCCESS,
-  ORDER_DONE
+  ORDER_DONE,
 } from "./actionTypes";
 import axios from "axios";
 export const getFurniture = (data) => ({
@@ -23,17 +23,17 @@ export const getError = () => ({
 });
 
 export const signoutPerformed = () => ({
-  type: SIGNOUT_SUCCESS
+  type: SIGNOUT_SUCCESS,
 });
 
 export const getFurnitureData = (pageNo) => async (dispatch) => {
   dispatch(getLoading());
   return axios
-    .get("https://overstock-clone-akash.herokuapp.com/products",{
+    .get("http://localhost:8080/products", {
       params: {
-        "_limit": 9,
-        "_page": pageNo
-      }
+        limit: 9,
+        page: pageNo,
+      },
     })
     .then((response) => {
       dispatch(getFurniture(response.data));
@@ -43,26 +43,32 @@ export const getFurnitureData = (pageNo) => async (dispatch) => {
     });
 };
 
-export const getFurnitureDataWithParams = ({ _sort, _order },pageNo) => {
-  return axios.get(`https://overstock-clone-akash.herokuapp.com/products`, {
+export const getFurnitureDataWithParams = ({ sortby, order }, pageNo) => {
+  return axios.get(`http://localhost:8080/products`, {
     params: {
-      "_limit": 9,
-      "_page": pageNo,
-      _sort,
-      _order,
+      limit: 9,
+      page: pageNo,
+      sortby,
+      order,
     },
   });
 };
 
-export const getFurnitureDataFilter = (category, brands, _sort, _order,pageNo) => {
-  return axios.get(`https://overstock-clone-akash.herokuapp.com/products`, {
+export const getFurnitureDataFilter = (
+  category,
+  brands,
+  sortby,
+  order,
+  pageNo
+) => {
+  return axios.get(`http://localhost:8080/products`, {
     params: {
-      "_limit": 9,
-      "_page": pageNo,
+      limit: 9,
+      page: pageNo,
       category,
-      brand:brands,
-      _sort,
-      _order,
+      brand: brands,
+      sortby,
+      order,
     },
   });
 };
@@ -76,8 +82,8 @@ export const addToCart = (payload) => {
 export const orderDone = () => {
   return {
     type: ORDER_DONE,
-  }
-}
+  };
+};
 export const removeFromCart = (id) => async (dispatch) => {
   dispatch(getLoading());
   return axios
@@ -112,10 +118,9 @@ export const loginSignupSuccess = (payload) => ({
 export const clearCartData = (id) => async (dispatch) => {
   dispatch(getLoading());
   return fetch(`https://over-stock.herokuapp.com/AddToCartItems/${id}`, {
-    method: 'DELETE',
+    method: "DELETE",
     headers: {
-      'Content-Type': 'application/json'
-    }
-  })
+      "Content-Type": "application/json",
+    },
+  });
 };
-

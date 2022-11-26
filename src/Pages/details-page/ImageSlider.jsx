@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 
 const ImageSlider = ({ slides }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  //   useEffect(() => {}, [slides]);
   const sliderStyles = {
     height: "100%",
     position: "relative",
@@ -13,7 +12,7 @@ const ImageSlider = ({ slides }) => {
     backgroundSize: "cover",
     width: "90%",
     height: "100%",
-    backgroundImage: `url(${slides[currentIndex]})`,
+    backgroundImage: `url(${slides[6]})`,
     position: "center",
   };
 
