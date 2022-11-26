@@ -4,6 +4,7 @@ const cors = require("cors");
 const { register, login } = require("./controllers/user.controllers.js");
 const { default: mongoose } = require("mongoose");
 const productRouter = require("./routes/products.routes.js");
+const cartRouter = require("./routes/cart.routes.js");
 require("dotenv").config();
 
 const ATLAS_USERNAME = process.env.ATLAS_USERNAME;
@@ -17,6 +18,7 @@ app.use(express.json());
 
 // app.use();
 app.use("/products", productRouter);
+app.use("/cart", cartRouter);
 
 app.post("/register", register);
 app.post("/login", login);
