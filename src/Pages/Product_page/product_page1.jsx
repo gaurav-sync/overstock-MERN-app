@@ -15,12 +15,14 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getError,
   getFurniture,
   getFurnitureData,
   getFurnitureDataFilter,
   getLoading,
 } from "../../redux/action";
 import { Link, useSearchParams } from "react-router-dom";
+import axios from "axios";
 
 function AirbnbCard({ elements }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -114,6 +116,27 @@ export const Products = ({
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   // -------------
+  
+  useEffect(()=>{
+    const getData = ()=>{
+      axios
+    .get("https://overstock-api.onrender.com/products", {
+      params: {
+        page: 1,
+      },
+    })
+    .then((response) => {
+      console.log(response,"reduxxxxxxxxxxxxxxxxxxxx")
+      dispatch(getFurniture(response.data));
+    })
+    .catch((err) => {
+      dispatch(getError());
+    });
+
+    }
+
+    getData();
+  },[])
 
   useEffect(() => {
     dispatch(getLoading());

@@ -7,7 +7,7 @@ import { getToCartItem, postToCartItem } from "./detailsPageHelper";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/action";
 const getData = (id) => {
-  return fetch(`http://localhost:8080/products?position=${id}`).then((res) =>
+  return fetch(`https://overstock-api.onrender.com/products?position=${id}`).then((res) =>
     res.json()
   );
 };

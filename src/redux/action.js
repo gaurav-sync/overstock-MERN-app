@@ -28,14 +28,15 @@ export const signoutPerformed = () => ({
 
 export const getFurnitureData = (pageNo) => async (dispatch) => {
   dispatch(getLoading());
+  console.log("workingggggggg")
   return axios
-    .get("http://localhost:8080/products", {
+    .get("https://overstock-api.onrender.com/products", {
       params: {
-        limit: 9,
         page: pageNo,
       },
     })
     .then((response) => {
+      console.log(response,"reduxxxxxxxxxxxxxxxxxxxx")
       dispatch(getFurniture(response.data));
     })
     .catch((err) => {
@@ -44,7 +45,7 @@ export const getFurnitureData = (pageNo) => async (dispatch) => {
 };
 
 export const getFurnitureDataWithParams = ({ sortby, order }, pageNo) => {
-  return axios.get(`http://localhost:8080/products`, {
+  return axios.get(`https://overstock-api.onrender.com/products`, {
     params: {
       limit: 9,
       page: pageNo,
@@ -61,7 +62,7 @@ export const getFurnitureDataFilter = (
   order,
   pageNo
 ) => {
-  return axios.get(`http://localhost:8080/products`, {
+  return axios.get(`https://overstock-api.onrender.com/products`, {
     params: {
       limit: 9,
       page: pageNo,

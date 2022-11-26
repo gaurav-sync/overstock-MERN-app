@@ -12,7 +12,10 @@ import {
 } from "../../redux/action";
 
 
-export default function SortDropdown({ page, sort, setSort, filterDataCat, filterDataBrand }) {
+
+export default function SortDropdown({ page, sortby, setSort, filterDataCat, filterDataBrand }) {
+  const state = useSelector((state) => state);
+  const { loading, error, furnitures } = state;
   const [searchParams, setSearchParams] = useSearchParams();
   const [order, setOrder] = useState("");
   const dispatch = useDispatch();
@@ -20,9 +23,9 @@ export default function SortDropdown({ page, sort, setSort, filterDataCat, filte
   const [brands, setBrands] = useState(searchParams.getAll("brands") || []);
 
   // useEffect(() => {
-  //   if (sort !="") {
+  //   if (sortby !="") {
   //     dispatch(getLoading());
-  //     getFurnitureDataWithParams({ _sort: "price", _order: sort },page).then(
+  //     getFurnitureDataWithParams({ _sortby: "price", _order: sortby },page).then(
   //       (res) => {
   //         dispatch(getFurniture(res.data));
   //       }
@@ -32,54 +35,54 @@ export default function SortDropdown({ page, sort, setSort, filterDataCat, filte
   //     dispatch(getLoading());
   //     dispatch(getFurnitureData());
   //   }
-  // }, [sort,page,filterDataBrand,filterDataCat]);
+  // }, [sortby,page,filterDataBrand,filterDataCat]);
 
   useEffect(() => {
     dispatch(getLoading())
     if (filterDataBrand.length && filterDataCat.length) {
-      if (sort != "") {
-        getFurnitureDataFilter(filterDataCat, filterDataBrand, "price", sort, page).then((res) => dispatch(getFurniture(res.data)))
+      if (sortby != "") {
+        getFurnitureDataFilter(filterDataCat, filterDataBrand, "price", sortby, page).then((res) => dispatch(getFurniture(res.data)))
       } else {
         getFurnitureDataFilter(filterDataCat, filterDataBrand, undefined, undefined, page).then((res) => dispatch(getFurniture(res.data)))
       }
     }
     else if (filterDataBrand.length == 0)
-      if (sort != "") {
-        getFurnitureDataFilter(filterDataCat, undefined, "price", sort, page).then((res) => dispatch(getFurniture(res.data)))
+      if (sortby != "") {
+        getFurnitureDataFilter(filterDataCat, undefined, "price", sortby, page).then((res) => dispatch(getFurniture(res.data)))
       } else {
         getFurnitureDataFilter(filterDataCat, undefined, undefined, undefined, page).then((res) => dispatch(getFurniture(res.data)))
       }
     else if (filterDataCat.length == 0) {
-      if (sort != "") {
-        getFurnitureDataFilter(undefined, filterDataBrand, "price", sort, page).then((res) => dispatch(getFurniture(res.data)))
+      if (sortby != "") {
+        getFurnitureDataFilter(undefined, filterDataBrand, "price", sortby, page).then((res) => dispatch(getFurniture(res.data)))
       } else {
         getFurnitureDataFilter(undefined, filterDataBrand, undefined, undefined, page).then((res) => dispatch(getFurniture(res.data)))
       }
     } else {
-      getFurnitureDataFilter(undefined, undefined, sort, page).then((res) => dispatch(getFurniture(res.data)))
+      getFurnitureDataFilter(undefined, undefined, sortby, page).then((res) => dispatch(getFurniture(res.data)))
     }
-  }, [filterDataCat, filterDataBrand, page, sort])
+  }, [filterDataCat, filterDataBrand, page, sortby])
 
   useEffect(() => {
     dispatch(getLoading())
     if (filterDataBrand.length && filterDataCat.length) {
-      if (sort != "") {
-        getFurnitureDataFilter(filterDataCat, filterDataBrand, "price", sort, page).then((res) => dispatch(getFurniture(res.data)))
+      if (sortby != "") {
+        getFurnitureDataFilter(filterDataCat, filterDataBrand, "price", sortby, page).then((res) => dispatch(getFurniture(res.data)))
       } else {
         getFurnitureDataFilter(filterDataCat, filterDataBrand, undefined, undefined, page).then((res) => dispatch(getFurniture(res.data)))
       }
     }else if(!filterDataBrand.length && !filterDataCat.length) {
-      getFurnitureDataFilter(undefined, undefined,"price", sort, page).then((res) => dispatch(getFurniture(res.data)))
+      getFurnitureDataFilter(undefined, undefined,"price", sortby, page).then((res) => dispatch(getFurniture(res.data)))
     }
     else if (filterDataBrand.length == 0)
-      if (sort != "") {
-        getFurnitureDataFilter(filterDataCat, undefined, "price", sort, page).then((res) => dispatch(getFurniture(res.data)))
+      if (sortby != "") {
+        getFurnitureDataFilter(filterDataCat, undefined, "price", sortby, page).then((res) => dispatch(getFurniture(res.data)))
       } else {
         getFurnitureDataFilter(filterDataCat, undefined, undefined, undefined, page).then((res) => dispatch(getFurniture(res.data)))
       }
     else if (filterDataCat.length == 0) {
-      if (sort != "") {
-        getFurnitureDataFilter(undefined, filterDataBrand, "price", sort, page).then((res) => dispatch(getFurniture(res.data)))
+      if (sortby != "") {
+        getFurnitureDataFilter(undefined, filterDataBrand, "price", sortby, page).then((res) => dispatch(getFurniture(res.data)))
       } else {
         getFurnitureDataFilter(undefined, filterDataBrand, undefined, undefined, page).then((res) => dispatch(getFurniture(res.data)))
       }
@@ -88,40 +91,40 @@ export default function SortDropdown({ page, sort, setSort, filterDataCat, filte
   useEffect(() => {
     const obj = { page };
     if (filterDataBrand.length && filterDataCat.length) {
-      if (sort != "") {
-        obj.order = sort;
-        obj.sort = "price"
+      if (sortby != "") {
+        obj.order = sortby;
+        obj.sortby = "price"
       }
       obj.category = filterDataCat;
       obj.brands = filterDataBrand
     }
     else if (filterDataBrand.length == 0) {
-      if (sort != "") {
-        obj.order = sort;
-        obj.sort = "price"
+      if (sortby != "") {
+        obj.order = sortby;
+        obj.sortby = "price"
       }
       obj.category = filterDataCat;
     }
     else if (filterDataCat.length == 0) {
-      if (sort != "") {
-        obj.order = sort;
-        obj.sort = "price"
+      if (sortby != "") {
+        obj.order = sortby;
+        obj.sortby = "price"
       }
       obj.brands = filterDataBrand
     } else {
-      if (sort != "") {
-        obj.order = sort;
-        obj.sort = "price"
+      if (sortby != "") {
+        obj.order = sortby;
+        obj.sortby = "price"
       }
     }
 
     setSearchParams(obj);
-  }, [filterDataCat, filterDataBrand, page, sort])
+  }, [filterDataCat, filterDataBrand, page, sortby])
 
   useEffect(() => {
-    if (sort !="") {
+    if (sortby !="") {
       dispatch(getLoading());
-      getFurnitureDataWithParams({ _sort: "price", _order: sort },page).then(
+      getFurnitureDataWithParams({ sortby: "price", order: sortby },page).then(
         (res) => {
           dispatch(getFurniture(res.data));
         }
@@ -137,21 +140,21 @@ export default function SortDropdown({ page, sort, setSort, filterDataCat, filte
   // useEffect(() => {
   //   dispatch(getLoading())
   //   if (brands.length && category.length) {
-  //     if (sort != "") {
-  //       getFurnitureDataFilter(category, brands, "price", sort).then((res) => dispatch(getFurniture(res.data)))
+  //     if (sortby != "") {
+  //       getFurnitureDataFilter(category, brands, "price", sortby).then((res) => dispatch(getFurniture(res.data)))
   //     } else {
   //       getFurnitureDataFilter(category, brands, undefined, undefined).then((res) => dispatch(getFurniture(res.data)))
   //     }
   //   }
   //   else if (brands.length == 0)
-  //     if (sort != "") {
-  //       getFurnitureDataFilter(category, undefined, "price", sort).then((res) => dispatch(getFurniture(res.data)))
+  //     if (sortby != "") {
+  //       getFurnitureDataFilter(category, undefined, "price", sortby).then((res) => dispatch(getFurniture(res.data)))
   //     } else {
   //       getFurnitureDataFilter(category, undefined, undefined, undefined).then((res) => dispatch(getFurniture(res.data)))
   //     }
   //   else if (category.length == 0) {
-  //     if (sort != "") {
-  //       getFurnitureDataFilter(undefined, brands, "price", sort).then((res) => dispatch(getFurniture(res.data)))
+  //     if (sortby != "") {
+  //       getFurnitureDataFilter(undefined, brands, "price", sortby).then((res) => dispatch(getFurniture(res.data)))
   //     } else {
   //       getFurnitureDataFilter(undefined, brands, undefined, undefined).then((res) => dispatch(getFurniture(res.data)))
   //     }
@@ -163,8 +166,8 @@ export default function SortDropdown({ page, sort, setSort, filterDataCat, filte
   useEffect(() => {
     const obj = {
       page,
-      order:sort,
-      "_sort": "price"
+      order:sortby,
+      "sortby": "price"
     }
     if (brands.length > 0) {
       obj.brands = brands;
@@ -172,9 +175,9 @@ export default function SortDropdown({ page, sort, setSort, filterDataCat, filte
     if (category.length > 0) {
       obj.category = category;
     }
-    if (sort != "") setSearchParams(obj)
+    if (sortby != "") setSearchParams(obj)
     else setSearchParams({ page });
-  }, [sort])
+  }, [sortby])
 
   const handleSort = (e) => {
     setSort(e.target.value);
@@ -182,12 +185,12 @@ export default function SortDropdown({ page, sort, setSort, filterDataCat, filte
   return (
     <HStack justifyContent="flex-end" m={3}>
       <Heading fontSize={22} fontWeight="normal" marginRight={2}>
-        Sort By:{" "}
+        sortby By:{" "}
       </Heading>
       <Select w={200} onChange={handleSort} className="selector">
-        <option value="" selected={sort=="" ? true : false}>Select option</option>
-        <option value="desc" selected={sort=="desc" ? true : false}>Price : High to Low</option>
-        <option value="asc" selected={sort=="asc" ? true : false}>Price : Low to High</option>
+        <option value="" selected={sortby=="" ? true : false}>Select option</option>
+        <option value="desc" selected={sortby=="desc" ? true : false}>Price : High to Low</option>
+        <option value="asc" selected={sortby=="asc" ? true : false}>Price : Low to High</option>
       </Select>
     </HStack>
   );
