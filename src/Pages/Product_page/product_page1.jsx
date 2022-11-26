@@ -15,14 +15,12 @@ import { Grid, GridItem } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getError,
   getFurniture,
   getFurnitureData,
   getFurnitureDataFilter,
   getLoading,
 } from "../../redux/action";
 import { Link, useSearchParams } from "react-router-dom";
-import axios from "axios";
 
 function AirbnbCard({ elements }) {
   const [isHovered, setIsHovered] = useState(false);
@@ -106,7 +104,7 @@ function AirbnbCard({ elements }) {
 export const Products = ({
   page,
   setPage,
-  sortBy,
+  sortby,
   filterDataCat,
   filterDataBrand,
 }) => {
@@ -116,40 +114,18 @@ export const Products = ({
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   // -------------
-  
-  useEffect(()=>{
-    const getData = ()=>{
-      axios
-    .get("https://overstock-api.onrender.com/products", {
-      params: {
-        page: 1,
-      },
-    })
-    .then((response) => {
-      console.log(response,"reduxxxxxxxxxxxxxxxxxxxx")
-      dispatch(getFurniture(response.data));
-    })
-    .catch((err) => {
-      dispatch(getError());
-    });
-
-    }
-
-    getData();
-  },[])
-
   useEffect(() => {
     dispatch(getLoading());
     if (filterDataBrand.length && filterDataCat.length) {
-      if (sortBy != "") {
+      if (sortby != "") {
         getFurnitureDataFilter(
           filterDataCat,
           filterDataBrand,
           "price",
-          sortBy,
+          sortby,
           page
         ).then((res) => {
-          setTotalItems(res.headers["x-total-count"]);
+          setTotalItems(res.data.total);
           dispatch(getFurniture(res.data));
         });
       } else {
@@ -160,20 +136,20 @@ export const Products = ({
           undefined,
           page
         ).then((res) => {
-          setTotalItems(res.headers["x-total-count"]);
+          setTotalItems(res.data.total);
           dispatch(getFurniture(res.data));
         });
       }
     } else if (filterDataBrand.length == 0)
-      if (sortBy != "") {
+      if (sortby != "") {
         getFurnitureDataFilter(
           filterDataCat,
           undefined,
           "price",
-          sortBy,
+          sortby,
           page
         ).then((res) => {
-          setTotalItems(res.headers["x-total-count"]);
+          setTotalItems(res.data.total);
           dispatch(getFurniture(res.data));
         });
       } else {
@@ -184,20 +160,20 @@ export const Products = ({
           undefined,
           page
         ).then((res) => {
-          setTotalItems(res.headers["x-total-count"]);
+          setTotalItems(res.data.total);
           dispatch(getFurniture(res.data));
         });
       }
     else if (filterDataCat.length == 0) {
-      if (sortBy != "") {
+      if (sortby != "") {
         getFurnitureDataFilter(
           undefined,
           filterDataBrand,
           "price",
-          sortBy,
+          sortby,
           page
         ).then((res) => {
-          setTotalItems(res.headers["x-total-count"]);
+          setTotalItems(res.data.total);
           dispatch(getFurniture(res.data));
         });
       } else {
@@ -208,30 +184,30 @@ export const Products = ({
           undefined,
           page
         ).then((res) => {
-          setTotalItems(res.headers["x-total-count"]);
+          setTotalItems(res.data.total);
           dispatch(getFurniture(res.data));
         });
       }
     } else {
-      getFurnitureDataFilter(undefined, undefined, sortBy, page).then((res) => {
-        setTotalItems(res.headers["x-total-count"]);
+      getFurnitureDataFilter(undefined, undefined, sortby, page).then((res) => {
+        setTotalItems(res.data.total);
         dispatch(getFurniture(res.data));
       });
     }
-  }, [filterDataCat, filterDataBrand, page, sortBy]);
+  }, [filterDataCat, filterDataBrand, page, sortby]);
 
   useEffect(() => {
     dispatch(getLoading());
     if (filterDataBrand.length && filterDataCat.length) {
-      if (sortBy != "") {
+      if (sortby != "") {
         getFurnitureDataFilter(
           filterDataCat,
           filterDataBrand,
           "price",
-          sortBy,
+          sortby,
           page
         ).then((res) => {
-          setTotalItems(res.headers["x-total-count"]);
+          setTotalItems(res.data.total);
           dispatch(getFurniture(res.data));
         });
       } else {
@@ -242,27 +218,27 @@ export const Products = ({
           undefined,
           page
         ).then((res) => {
-          setTotalItems(res.headers["x-total-count"]);
+          setTotalItems(res.data.total);
           dispatch(getFurniture(res.data));
         });
       }
     } else if (!filterDataBrand.length && !filterDataCat.length) {
-      getFurnitureDataFilter(undefined, undefined, "price", sortBy, page).then(
+      getFurnitureDataFilter(undefined, undefined, "price", sortby, page).then(
         (res) => {
-          setTotalItems(res.headers["x-total-count"]);
+          setTotalItems(res.data.total);
           dispatch(getFurniture(res.data));
         }
       );
     } else if (filterDataBrand.length == 0)
-      if (sortBy != "") {
+      if (sortby != "") {
         getFurnitureDataFilter(
           filterDataCat,
           undefined,
           "price",
-          sortBy,
+          sortby,
           page
         ).then((res) => {
-          setTotalItems(res.headers["x-total-count"]);
+          setTotalItems(res.data.total);
           dispatch(getFurniture(res.data));
         });
       } else {
@@ -273,20 +249,20 @@ export const Products = ({
           undefined,
           page
         ).then((res) => {
-          setTotalItems(res.headers["x-total-count"]);
+          setTotalItems(res.data.total);
           dispatch(getFurniture(res.data));
         });
       }
     else if (filterDataCat.length == 0) {
-      if (sortBy != "") {
+      if (sortby != "") {
         getFurnitureDataFilter(
           undefined,
           filterDataBrand,
           "price",
-          sortBy,
+          sortby,
           page
         ).then((res) => {
-          setTotalItems(res.headers["x-total-count"]);
+          setTotalItems(res.data.total);
           dispatch(getFurniture(res.data));
         });
       } else {
@@ -297,7 +273,7 @@ export const Products = ({
           undefined,
           page
         ).then((res) => {
-          setTotalItems(res.headers["x-total-count"]);
+          setTotalItems(res.data.total);
           dispatch(getFurniture(res.data));
         });
       }
@@ -306,32 +282,33 @@ export const Products = ({
   useEffect(() => {
     const obj = { page };
     if (filterDataBrand.length && filterDataCat.length) {
-      if (sortBy != "") {
-        obj.order = sortBy;
-        obj.sortBy = "price";
+      if (sortby != "") {
+        obj.order = sortby;
+        obj.sortby = "price";
       }
       obj.category = filterDataCat;
       obj.brands = filterDataBrand;
     } else if (filterDataBrand.length == 0) {
-      if (sortBy != "") {
-        obj.order = sortBy;
-        obj.sortBy = "price";
+      if (sortby != "") {
+        obj.order = sortby;
+        obj.sortby = "price";
       }
       obj.category = filterDataCat;
     } else if (filterDataCat.length == 0) {
-      if (sortBy != "") {
-        obj.order = sortBy;
-        obj.sortBy = "price";
+      if (sortby != "") {
+        obj.order = sortby;
+        obj.sortby = "price";
       }
       obj.brands = filterDataBrand;
     } else {
-      if (sortBy != "") {
-        obj.order = sortBy;
-        obj.sortBy = "price";
+      if (sortby != "") {
+        obj.order = sortby;
+        obj.sortby = "price";
       }
     }
+
     setSearchParams(obj);
-  }, [filterDataCat, filterDataBrand, page, sortBy]);
+  }, [filterDataCat, filterDataBrand, page, sortby]);
 
   // ---------
   if (loading) {
@@ -357,7 +334,6 @@ export const Products = ({
   if (error) {
     return <Heading>Something Went Wrong.. Please Refresh</Heading>;
   }
-  console.log(furnitures);
   return (
     <>
       <Center key={Math.random()}>
@@ -375,7 +351,7 @@ export const Products = ({
             lg: 6,
           }}
         >
-          {furnitures.data.map((elm) => (
+          {furnitures.map((elm) => (
             <AirbnbCard key={elm.position} elements={elm} />
           ))}
         </Grid>

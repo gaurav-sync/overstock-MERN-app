@@ -11,7 +11,7 @@ import {
 import axios from "axios";
 export const getFurniture = (data) => ({
   type: GET_FURNITURE,
-  payload: data,
+  payload: data.data,
 });
 
 export const getLoading = () => ({
@@ -28,7 +28,6 @@ export const signoutPerformed = () => ({
 
 export const getFurnitureData = (pageNo) => async (dispatch) => {
   dispatch(getLoading());
-  console.log("workingggggggg")
   return axios
     .get("https://overstock-api.onrender.com/products", {
       params: {
@@ -36,7 +35,6 @@ export const getFurnitureData = (pageNo) => async (dispatch) => {
       },
     })
     .then((response) => {
-      console.log(response,"reduxxxxxxxxxxxxxxxxxxxx")
       dispatch(getFurniture(response.data));
     })
     .catch((err) => {
