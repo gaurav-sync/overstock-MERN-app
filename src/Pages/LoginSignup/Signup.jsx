@@ -43,7 +43,7 @@ function Signup() {
     //   .finally(() => setLoading(false));
 
 
-    fetch(`http://localhost:8080/register`,{
+    fetch(`https://overstock-api.onrender.com/register`,{
       method: "POST",
       body: JSON.stringify(body),
       headers: {
