@@ -104,7 +104,7 @@ function AirbnbCard({ elements }) {
 export const Products = ({
   page,
   setPage,
-  sort,
+  sortBy,
   filterDataCat,
   filterDataBrand,
 }) => {
@@ -118,12 +118,12 @@ export const Products = ({
   useEffect(() => {
     dispatch(getLoading());
     if (filterDataBrand.length && filterDataCat.length) {
-      if (sort != "") {
+      if (sortBy != "") {
         getFurnitureDataFilter(
           filterDataCat,
           filterDataBrand,
           "price",
-          sort,
+          sortBy,
           page
         ).then((res) => {
           setTotalItems(res.headers["x-total-count"]);
@@ -142,12 +142,12 @@ export const Products = ({
         });
       }
     } else if (filterDataBrand.length == 0)
-      if (sort != "") {
+      if (sortBy != "") {
         getFurnitureDataFilter(
           filterDataCat,
           undefined,
           "price",
-          sort,
+          sortBy,
           page
         ).then((res) => {
           setTotalItems(res.headers["x-total-count"]);
@@ -166,12 +166,12 @@ export const Products = ({
         });
       }
     else if (filterDataCat.length == 0) {
-      if (sort != "") {
+      if (sortBy != "") {
         getFurnitureDataFilter(
           undefined,
           filterDataBrand,
           "price",
-          sort,
+          sortBy,
           page
         ).then((res) => {
           setTotalItems(res.headers["x-total-count"]);
@@ -190,22 +190,22 @@ export const Products = ({
         });
       }
     } else {
-      getFurnitureDataFilter(undefined, undefined, sort, page).then((res) => {
+      getFurnitureDataFilter(undefined, undefined, sortBy, page).then((res) => {
         setTotalItems(res.headers["x-total-count"]);
         dispatch(getFurniture(res.data));
       });
     }
-  }, [filterDataCat, filterDataBrand, page, sort]);
+  }, [filterDataCat, filterDataBrand, page, sortBy]);
 
   useEffect(() => {
     dispatch(getLoading());
     if (filterDataBrand.length && filterDataCat.length) {
-      if (sort != "") {
+      if (sortBy != "") {
         getFurnitureDataFilter(
           filterDataCat,
           filterDataBrand,
           "price",
-          sort,
+          sortBy,
           page
         ).then((res) => {
           setTotalItems(res.headers["x-total-count"]);
@@ -224,19 +224,19 @@ export const Products = ({
         });
       }
     } else if (!filterDataBrand.length && !filterDataCat.length) {
-      getFurnitureDataFilter(undefined, undefined, "price", sort, page).then(
+      getFurnitureDataFilter(undefined, undefined, "price", sortBy, page).then(
         (res) => {
           setTotalItems(res.headers["x-total-count"]);
           dispatch(getFurniture(res.data));
         }
       );
     } else if (filterDataBrand.length == 0)
-      if (sort != "") {
+      if (sortBy != "") {
         getFurnitureDataFilter(
           filterDataCat,
           undefined,
           "price",
-          sort,
+          sortBy,
           page
         ).then((res) => {
           setTotalItems(res.headers["x-total-count"]);
@@ -255,12 +255,12 @@ export const Products = ({
         });
       }
     else if (filterDataCat.length == 0) {
-      if (sort != "") {
+      if (sortBy != "") {
         getFurnitureDataFilter(
           undefined,
           filterDataBrand,
           "price",
-          sort,
+          sortBy,
           page
         ).then((res) => {
           setTotalItems(res.headers["x-total-count"]);
@@ -283,33 +283,32 @@ export const Products = ({
   useEffect(() => {
     const obj = { page };
     if (filterDataBrand.length && filterDataCat.length) {
-      if (sort != "") {
-        obj.order = sort;
-        obj.sort = "price";
+      if (sortBy != "") {
+        obj.order = sortBy;
+        obj.sortBy = "price";
       }
       obj.category = filterDataCat;
       obj.brands = filterDataBrand;
     } else if (filterDataBrand.length == 0) {
-      if (sort != "") {
-        obj.order = sort;
-        obj.sort = "price";
+      if (sortBy != "") {
+        obj.order = sortBy;
+        obj.sortBy = "price";
       }
       obj.category = filterDataCat;
     } else if (filterDataCat.length == 0) {
-      if (sort != "") {
-        obj.order = sort;
-        obj.sort = "price";
+      if (sortBy != "") {
+        obj.order = sortBy;
+        obj.sortBy = "price";
       }
       obj.brands = filterDataBrand;
     } else {
-      if (sort != "") {
-        obj.order = sort;
-        obj.sort = "price";
+      if (sortBy != "") {
+        obj.order = sortBy;
+        obj.sortBy = "price";
       }
     }
-
     setSearchParams(obj);
-  }, [filterDataCat, filterDataBrand, page, sort]);
+  }, [filterDataCat, filterDataBrand, page, sortBy]);
 
   // ---------
   if (loading) {
@@ -335,6 +334,7 @@ export const Products = ({
   if (error) {
     return <Heading>Something Went Wrong.. Please Refresh</Heading>;
   }
+  console.log(furnitures);
   return (
     <>
       <Center key={Math.random()}>
@@ -352,7 +352,7 @@ export const Products = ({
             lg: 6,
           }}
         >
-          {furnitures.map((elm) => (
+          {furnitures.data.map((elm) => (
             <AirbnbCard key={elm.position} elements={elm} />
           ))}
         </Grid>

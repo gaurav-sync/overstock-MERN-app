@@ -7,9 +7,9 @@ import { getToCartItem, postToCartItem } from "./detailsPageHelper";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/action";
 const getData = (id) => {
-  return fetch(
-    `https://overstock-clone-akash.herokuapp.com/products?position=${id}`
-  ).then((res) => res.json());
+  return fetch(`http://localhost:8080/products?position=${id}`).then((res) =>
+    res.json()
+  );
 };
 function DetailsPage() {
   const dispatch = useDispatch();
@@ -20,9 +20,10 @@ function DetailsPage() {
   const [count, setCount] = useState(1);
   useEffect(() => {
     getData(id).then((res) => {
-      setData(res[0]);
-      res[0].quantity = count;
-      setSlides(res[0].thumbnails[0]);
+      // console.log(res);
+      setData(res.data[0]);
+      res.data[0].quantity = count;
+      setSlides(res.data[0].thumbnails[0]);
     });
   }, []);
 
@@ -82,16 +83,16 @@ function DetailsPage() {
   const handleClick = () => {
     postToCartItem(data).then(() => {
       navigate("/cart");
-    })
-    getToCartItem().then((res)=> {
+    });
+    getToCartItem().then((res) => {
       dispatch(addToCart(res.data));
-    })
-  }
-  const quantyCollector = (e)=> {
+    });
+  };
+  const quantyCollector = (e) => {
     let countItem = +e.target.value;
     setCount(countItem);
-    setData({...data,[e.target.name]:countItem,id:data.position})
-  }
+    setData({ ...data, [e.target.name]: countItem, id: data.position });
+  };
 
   return (
     <Box mt={"180px"}>
@@ -109,7 +110,13 @@ function DetailsPage() {
             <sup style={upper}>00</sup>
           </p>
           <div style={buttons}>
-            <select name="quantity" id="" style={quantity} className="itemQuantity" onChange={quantyCollector}>
+            <select
+              name="quantity"
+              id=""
+              style={quantity}
+              className="itemQuantity"
+              onChange={quantyCollector}
+            >
               <option value="1">Quantity 1</option>
               <option value="2">Quantity 2</option>
               <option value="3">Quantity 3</option>
