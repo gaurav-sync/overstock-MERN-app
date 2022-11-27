@@ -147,8 +147,27 @@ const getAllcarts = async (req,res)=>{
 }
 
 
+const cartcheckout = async(req, res)=>{
+    try{
+        const { userId } = req.params;
+
+            let data = await Cartmodel.find( { userId: userId } ) // need to work
+        
+            let deletedcart = await Cartmodel.deleteMany( { userId: userId } )
 
 
+           return res.send({
+                status:"true",
+                data:deletedcart
+            })
+    }
+    catch(err){
+       return res.status(400).send({
+            status:"error",
+            data:"Please eneter proper userId"
+        })
+    }
+}
 
 
 module.exports = {
@@ -156,5 +175,6 @@ module.exports = {
     getUserCart,
     updatecart,
     deletecart,
-    getAllcarts
+    getAllcarts,
+    cartcheckout
 };
