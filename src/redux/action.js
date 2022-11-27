@@ -75,7 +75,7 @@ export const getFurnitureDataFilter = (
 export const addToCart = (data) => {
   return {
     type: ADD_TO_CART,
-    payload: data,
+    payload: data.data,
   };
 };
 export const orderDone = () => {
@@ -100,7 +100,7 @@ export const getCartData = (userId) => async (dispatch) => {
   return axios
     .get(`https://overstock-api.onrender.com/cart/${userId}`)
     .then((response) => {
-      dispatch(addToCart(response.data.data));
+      dispatch(addToCart(response.data));
     })
     .catch((err) => {
       dispatch(getError());

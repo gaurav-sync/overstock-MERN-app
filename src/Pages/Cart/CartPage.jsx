@@ -21,7 +21,7 @@ function Cartpage() {
   const getTotalPrice = () => {
     let totalPrice = 0;
     totalPrice =
-      cart.status != "error"
+      cart
         ? cart.reduce(
             (acc, elm) =>
               acc + Number(elm.product_id.price) * Number(elm.quantity),
@@ -45,7 +45,7 @@ function Cartpage() {
         <h1 className="heading">Shopping Cart</h1>
         <div className="parent">
           <div className="parent-Div1">
-            {cart.status != "error"
+            {cart
               ? cart.map((elem) => {
                   return (
                     <div className="box1">
@@ -144,7 +144,7 @@ function Cartpage() {
             </div>
           </div>
         </div>
-        <h3> Things We Know You'll Love</h3>
+        {/* <h3> Things We Know You'll Love</h3>
         <div className="parent2">
           <div>
             <img src="https://ak1.ostkcdn.com/images/products/is/images/direct/6f028d80157c02d1a519d36a0045fa8ef914efb0/Furniture-of-America-Transitional-Espresso-Dining-Buffet.jpg?impolicy=mediumlow" />
@@ -170,7 +170,7 @@ function Cartpage() {
             <h3> Sale $373.49</h3>
             <p>Furniture of America Rustic Espresso Dining Buffet with Wine</p>
           </div>
-        </div>
+        </div> */}
       </div>
     </Container>
   );
