@@ -6,10 +6,11 @@ import { Box, position } from "@chakra-ui/react";
 import { getToCartItem, postToCartItem } from "./detailsPageHelper";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/action";
+import jwt_decode from "jwt-decode";
 const getData = (id) => {
-  return fetch(`https://overstock-api.onrender.com/products?position=${id}`).then((res) =>
-    res.json()
-  );
+  return fetch(
+    `https://overstock-api.onrender.com/products?position=${id}`
+  ).then((res) => res.json());
 };
 function DetailsPage() {
   const dispatch = useDispatch();
@@ -20,13 +21,14 @@ function DetailsPage() {
   const [count, setCount] = useState(1);
   useEffect(() => {
     getData(id).then((res) => {
-      // console.log(res);
-      setData(res.data[0]);
       res.data[0].quantity = count;
+      setData(res.data[0]);
       setSlides(res.data[0].thumbnails[0]);
     });
   }, []);
-
+  const decoded = jwt_decode(localStorage.getItem("token"));
+  const userId = decoded._id;
+  // console.log(decoded, "hhhhhhhhhhhhhhhhh", userId);
   const style_main = {
     display: "flex",
     width: "70%",
@@ -81,11 +83,11 @@ function DetailsPage() {
     width: "48%",
   };
   const handleClick = () => {
-    postToCartItem(data).then(() => {
+    postToCartItem(userId, data._id, count).then(() => {
       navigate("/cart");
     });
-    getToCartItem().then((res) => {
-      dispatch(addToCart(res.data));
+    getToCartItem(userId).then((res) => {
+      dispatch(addToCart(res.data.data));
     });
   };
   const quantyCollector = (e) => {
@@ -93,7 +95,7 @@ function DetailsPage() {
     setCount(countItem);
     setData({ ...data, [e.target.name]: countItem, id: data.position });
   };
-
+  console.log(data);
   return (
     <Box mt={"180px"}>
       <div style={style_main}>

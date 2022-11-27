@@ -114,6 +114,7 @@ export const Products = ({
   const [searchParams, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();
   // -------------
+  // console.log(totalItem, "totalllll");
   useEffect(() => {
     dispatch(getLoading());
     if (filterDataBrand.length && filterDataCat.length) {
