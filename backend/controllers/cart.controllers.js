@@ -1,5 +1,6 @@
 const express = require('express');
 const Cartmodel = require('../models/cart.models.js');
+const Historymodel = require('../models/history.models.js');
 
 
 
@@ -152,6 +153,7 @@ const cartcheckout = async(req, res)=>{
         const { userId } = req.params;
 
             let data = await Cartmodel.find( { userId: userId } ) // need to work
+            await Historymodel.insertMany(data);
         
             let deletedcart = await Cartmodel.deleteMany( { userId: userId } )
 
