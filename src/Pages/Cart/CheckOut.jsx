@@ -16,7 +16,8 @@ import {
 } from "@chakra-ui/react";
 import { useRef } from "react";
 import { clearCartData, getCartData, orderDone } from "../../redux/action";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
+import jwt_decode from "jwt-decode";
 
 export default function CheckoutPage() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -27,21 +28,27 @@ export default function CheckoutPage() {
   const { cart } = useSelector((state) => state);
 
   useEffect(() => {}, [demo]);
-
+  const decoded = jwt_decode(localStorage.getItem("token"));
+  const userId = decoded._id;
+  // console.log(first)
   const getTotalPrice = () => {
-    let totalPrice = cart.reduce(
-      (acc, elm) => acc + Number(elm.price) * Number(elm.quantity),
-      0
-    );
-    return totalPrice.toFixed(2);
+    let totalPrice = 0;
+    totalPrice =
+      typeof cart !== "string"
+        ? cart.reduce(
+            (acc, elm) =>
+              acc + Number(elm.product_id.price) * Number(elm.quantity),
+            0
+          )
+        : 0;
+    return totalPrice;
   };
 
   const paymentSuccessFul = () => {
-    cart.map((elm) => {
-      dispatch(clearCartData(elm.id));
-      dispatch(orderDone());
-    });
+    dispatch(clearCartData(userId));
+    dispatch(orderDone());
     onClose();
+    navigate("/");
   };
 
   return (
@@ -258,20 +265,24 @@ export default function CheckoutPage() {
               <span class="badge badge-secondary badge-pill">3</span>
             </h4>
             <ul class="list-group mb-3">
-              {cart.map((elm) => {
-                return (
-                  <li
-                    class="list-group-item d-flex justify-content-between lh-condensed"
-                    key={Math.random()}
-                  >
-                    <div style={{ textAlign: "initial" }}>
-                      <h6 class="my-0">{elm.title}</h6>
-                      <small class="text-muted">{elm.category}</small>
-                    </div>
-                    <span class="text-muted">${elm.price}</span>
-                  </li>
-                );
-              })}
+              {typeof cart !== "string"
+                ? cart.map((elm) => {
+                    return (
+                      <li
+                        class="list-group-item d-flex justify-content-between lh-condensed"
+                        key={Math.random()}
+                      >
+                        <div style={{ textAlign: "initial" }}>
+                          <h6 class="my-0">{elm.product_id.title}</h6>
+                          <small class="text-muted">
+                            {elm.product_id.category}
+                          </small>
+                        </div>
+                        <span class="text-muted">${elm.product_id.price}</span>
+                      </li>
+                    );
+                  })
+                : 0}
 
               <li class="list-group-item d-flex justify-content-between bg-light">
                 <div class="text-success" style={{ textAlign: "initial" }}>

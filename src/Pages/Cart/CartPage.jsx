@@ -5,96 +5,110 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getCartData, removeFromCart } from "../../redux/action";
 import { BsFillEmojiLaughingFill } from "react-icons/bs";
+import jwt_decode from "jwt-decode";
+
 import "./checkout.css";
 function Cartpage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { cart, isAuth } = useSelector((state) => state);
-
-  const removeHandler = (id) => {
-    dispatch(removeFromCart(id));
+  const decoded = jwt_decode(localStorage.getItem("token"));
+  const userId = decoded._id;
+  console.log(userId);
+  const removeHandler = (_id) => {
+    dispatch(removeFromCart(_id, userId));
   };
   const getTotalPrice = () => {
-    let totalPrice = cart.reduce(
-      (acc, elm) => acc + Number(elm.price) * Number(elm.quantity),
-      0
-    );
-    return totalPrice.toFixed(2);
+    let totalPrice = 0;
+    totalPrice =
+      typeof cart !== "string"
+        ? cart.reduce(
+            (acc, elm) =>
+              acc + Number(elm.product_id.price) * Number(elm.quantity),
+            0
+          )
+        : 0;
+    return totalPrice;
   };
-
+  // console.log(getTotalPrice());
   useEffect(() => {
     if (!isAuth) {
       navigate("/signup");
     } else {
-      dispatch(getCartData());
+      dispatch(getCartData(userId));
     }
   }, []);
+  console.log(cart, "cart total-------------------");
   return (
     <Container maxW={"7xl"}>
       <div className="marginTop">
         <h1 className="heading">Shopping Cart</h1>
-
         <div className="parent">
           <div className="parent-Div1">
-            {cart.map((elm) => {
-              return (
-                <div className="box1">
-                  <div className="box1_imageDiv">
-                    <img src={elm.thumbnails[0][6]} />
-                  </div>
-                  <div>
-                    <div className="box1_Div2">
-                      <p
-                        style={{
-                          margin: "0px 0 10px 0",
-                        }}
-                      >
-                        {elm.title}
-                      </p>
-                      <p
-                        className=""
-                        style={{
-                          textTransform: "capitalize",
-                        }}
-                      >
-                        {elm.category}
-                      </p>
-                      <p>INR {elm.price}</p>
-                      <p>Ends in 1 day 18 hrs 52 min</p>
-                      <Flex
-                        style={{
-                          marginLeft: "0px",
-                        }}
-                        align={"center"}
-                        className="selected"
-                        width={"200px"}
-                        gap={2}
-                      >
-                        {" "}
-                        <BsFillEmojiLaughingFill /> High Satisfaction Item
-                      </Flex>
-                    </div>
-                    <div>
-                      <div className="innerBox">
-                        <h2>Quantity : {elm.quantity}</h2>
+            {cart.status != "error"
+              ? cart.map((elem) => {
+                  return (
+                    <div className="box1">
+                      <div className="box1_imageDiv">
+                        <img
+                          src={elem.product_id.thumbnails[0][6]}
+                          alt="cart-img"
+                        />
                       </div>
-                      <div className="innerBox2">
-                        <u>
-                          {" "}
-                          <button onClick={() => removeHandler(elm.id)}>
-                            Remove
-                          </button>{" "}
-                        </u>
-                        <u>
-                          {" "}
-                          <button>Save for later</button>
-                        </u>
+                      <div>
+                        <div className="box1_Div2">
+                          <p
+                            style={{
+                              margin: "0px 0 10px 0",
+                            }}
+                          >
+                            {elem.product_id.title}
+                          </p>
+                          <p
+                            className=""
+                            style={{
+                              textTransform: "capitalize",
+                            }}
+                          >
+                            {elem.product_id.category}
+                          </p>
+                          <p>INR {elem.product_id.price}</p>
+                          <p>Ends in 1 day 18 hrs 52 min</p>
+                          <Flex
+                            style={{
+                              marginLeft: "0px",
+                            }}
+                            align={"center"}
+                            className="selected"
+                            width={"200px"}
+                            gap={2}
+                          >
+                            {" "}
+                            <BsFillEmojiLaughingFill /> High Satisfaction Item
+                          </Flex>
+                        </div>
+                        <div>
+                          <div className="innerBox">
+                            <h2>Quantity : {elem.quantity}</h2>
+                          </div>
+                          <div className="innerBox2">
+                            <u>
+                              {" "}
+                              <button onClick={() => removeHandler(elem._id)}>
+                                Remove
+                              </button>{" "}
+                            </u>
+                            <u>
+                              {" "}
+                              <button>Save for later</button>
+                            </u>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              );
-            })}
+                  );
+                })
+              : null}
           </div>
 
           <div className="box2">
@@ -108,7 +122,7 @@ function Cartpage() {
             </Box>
             <div className="box2_main2">
               <div>
-                <h5>({cart.length}) item:</h5>
+                <h5>({typeof cart == "string" ? 0 : cart.length}) item:</h5>
                 <h5>INR {getTotalPrice()}</h5>
               </div>
               <div>
@@ -126,7 +140,7 @@ function Cartpage() {
                 <h3>Your Total:</h3>
                 <h3>{(getTotalPrice() * 0.93).toFixed(2)}</h3>
               </div>
-              <button onClick={()=> navigate("/checkout")}>Check Out</button>
+              <button onClick={() => navigate("/checkout")}>Check Out</button>
             </div>
           </div>
         </div>
