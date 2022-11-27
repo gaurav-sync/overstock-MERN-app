@@ -21,7 +21,7 @@ function Cartpage() {
   const getTotalPrice = () => {
     let totalPrice = 0;
     totalPrice =
-      typeof cart !== "string"
+      cart.status != "error"
         ? cart.reduce(
             (acc, elm) =>
               acc + Number(elm.product_id.price) * Number(elm.quantity),

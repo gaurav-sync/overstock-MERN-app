@@ -1,19 +1,13 @@
 const express = require("express");
 const Cartmodel = require("../models/cart.models.js");
 const Historymodel = require("../models/history.models.js");
-const jwt = require("jsonwebtoken");
-require("dotenv").config();
-const secretKey = process.env.JWT_SECRET;
+
 const addtocart = async (req, res) => {
   try {
-    const decoded = jwt.verify(
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzgyMTExYWQyNWEyZGM0ZTVhNzE3NzQiLCJlbWFpbCI6ImFrYXNoMTIzQGdtYWlsLmNvbSIsInBhc3N3b3JkIjoiJDJhJDEwJEhkWDhjdVpycS5RQ0tYb1BFN1R1NS5mbVNWZXd4V092VTdPLkU4TjZkTVh1aW16YzdYUmpXIiwiaWF0IjoxNjY5NTU2OTY0fQ.iVb_ILuPzhvSqNvcuR4DA3OZLfsCWnRP_i6AMVGRXa8",
-      secretKey
-    );
     let productpresence = await Cartmodel.find({
       product_id: req.body.product_id,
     });
-    let userpresence = await Cartmodel.find({ userId: decoded._id });
+    let userpresence = await Cartmodel.find({ userId: req.body.userId});
     if (productpresence.length > 0 && userpresence.length > 0) {
       let data = await Cartmodel.findByIdAndUpdate(productpresence[0]._id, {
         quantity: req.body.quantity,
@@ -50,17 +44,11 @@ const getUserCart = async (req, res) => {
         "product_id"
       );
 
-      if (cartProduct.length > 0) {
         return res.send({
           status: "success",
           data: cartProduct,
         });
-      } else {
-        return res.send({
-          status: "error",
-          data: "Your cart is empty",
-        });
-      }
+     
     } else {
       return res.send({
         status: "error",
