@@ -11,8 +11,8 @@ function Cartpage() {
   const navigate = useNavigate();
   const { cart, isAuth } = useSelector((state) => state);
 
-  const removeHandler = (id) => {
-    dispatch(removeFromCart(id));
+  const removeHandler = (userId) => {
+    dispatch(removeFromCart(userId));
   };
   const getTotalPrice = () => {
     let totalPrice = cart.reduce(
@@ -29,6 +29,7 @@ function Cartpage() {
       dispatch(getCartData());
     }
   }, []);
+  console.log(cart);
   return (
     <Container maxW={"7xl"}>
       <div className="marginTop">
@@ -37,10 +38,13 @@ function Cartpage() {
         <div className="parent">
           <div className="parent-Div1">
             {cart.map((elm) => {
+              {
+                console.log(elm);
+              }
               return (
                 <div className="box1">
                   <div className="box1_imageDiv">
-                    <img src={elm.thumbnails[0][6]} />
+                    <img src={elm.thumbnails[0][6]} alt="cart-img" />
                   </div>
                   <div>
                     <div className="box1_Div2">
@@ -81,7 +85,7 @@ function Cartpage() {
                       <div className="innerBox2">
                         <u>
                           {" "}
-                          <button onClick={() => removeHandler(elm.id)}>
+                          <button onClick={() => removeHandler(elm.userId)}>
                             Remove
                           </button>{" "}
                         </u>
@@ -126,7 +130,7 @@ function Cartpage() {
                 <h3>Your Total:</h3>
                 <h3>{(getTotalPrice() * 0.93).toFixed(2)}</h3>
               </div>
-              <button onClick={()=> navigate("/checkout")}>Check Out</button>
+              <button onClick={() => navigate("/checkout")}>Check Out</button>
             </div>
           </div>
         </div>

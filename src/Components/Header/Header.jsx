@@ -36,7 +36,6 @@ export const Header = () => {
     getToCartItem().then((res) => {
       dispatch(addToCart(res.data));
     });
-    console.log(cart);
   }, []);
 
   const handleSignout = () => {
@@ -233,7 +232,7 @@ export const Header = () => {
                       color={"red"}
                       fontWeight="800"
                     >
-                      {cart.length}
+                      {cart ? cart.length : 0}
                     </Text>
                   ) : null}
 

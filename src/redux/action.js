@@ -75,7 +75,7 @@ export const getFurnitureDataFilter = (
 export const addToCart = (payload) => {
   return {
     type: ADD_TO_CART,
-    payload,
+    payload: payload,
   };
 };
 export const orderDone = () => {
@@ -83,29 +83,27 @@ export const orderDone = () => {
     type: ORDER_DONE,
   };
 };
-export const removeFromCart = (id) => async (dispatch) => {
+export const removeFromCart = (userId) => async (dispatch) => {
   dispatch(getLoading());
   return axios
-    .delete(`https://over-stock.herokuapp.com/AddToCartItems/${id}`)
-    .then((response) => {
+    .delete(`https://overstock-api.onrender.com/cart/${userId}`)
+    .then(() => {
       dispatch(getCartData());
     })
     .catch((err) => {
-      // dispatch(getError());
       console.log(err);
     });
 };
 
-export const getCartData = () => async (dispatch) => {
+export const getCartData = (userId) => async (dispatch) => {
   dispatch(getLoading());
   return axios
-    .get(`https://over-stock.herokuapp.com/AddToCartItems`)
+    .get(`https://overstock-api.onrender.com/cart/${userId}`)
     .then((response) => {
       dispatch(addToCart(response.data));
     })
     .catch((err) => {
       dispatch(getError());
-      // console.log(err);
     });
 };
 
@@ -114,9 +112,9 @@ export const loginSignupSuccess = (payload) => ({
   payload,
 });
 
-export const clearCartData = (id) => async (dispatch) => {
+export const clearCartData = (userId) => async (dispatch) => {
   dispatch(getLoading());
-  return fetch(`https://over-stock.herokuapp.com/AddToCartItems/${id}`, {
+  return fetch(`https://overstock-api.onrender.com/cart/checkout/${userId}`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
