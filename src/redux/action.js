@@ -72,10 +72,10 @@ export const getFurnitureDataFilter = (
   });
 };
 
-export const addToCart = (payload) => {
+export const addToCart = (data) => {
   return {
     type: ADD_TO_CART,
-    payload: payload,
+    payload: data,
   };
 };
 export const orderDone = () => {
@@ -83,12 +83,12 @@ export const orderDone = () => {
     type: ORDER_DONE,
   };
 };
-export const removeFromCart = (userId) => async (dispatch) => {
+export const removeFromCart = (_id, userId) => async (dispatch) => {
   dispatch(getLoading());
   return axios
-    .delete(`https://overstock-api.onrender.com/cart/${userId}`)
+    .delete(`https://overstock-api.onrender.com/cart/${_id}`)
     .then(() => {
-      dispatch(getCartData());
+      dispatch(getCartData(userId));
     })
     .catch((err) => {
       console.log(err);
@@ -100,7 +100,7 @@ export const getCartData = (userId) => async (dispatch) => {
   return axios
     .get(`https://overstock-api.onrender.com/cart/${userId}`)
     .then((response) => {
-      dispatch(addToCart(response.data));
+      dispatch(addToCart(response.data.data));
     })
     .catch((err) => {
       dispatch(getError());

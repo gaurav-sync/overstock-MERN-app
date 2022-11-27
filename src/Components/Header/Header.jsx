@@ -232,7 +232,7 @@ export const Header = () => {
                       color={"red"}
                       fontWeight="800"
                     >
-                      {cart ? cart.length : 0}
+                      {typeof cart == "string" ? 0 : cart.length}
                     </Text>
                   ) : null}
 
