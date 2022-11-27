@@ -86,9 +86,9 @@ function DetailsPage() {
     postToCartItem(userId, data._id, count).then(() => {
       navigate("/cart");
     });
-    getToCartItem(userId).then((res) => {
-      dispatch(addToCart(res.data.data));
-    });
+    // getToCartItem(userId).then((res) => {
+    //   dispatch(addToCart(res.data));
+    // });
   };
   const quantyCollector = (e) => {
     let countItem = +e.target.value;
