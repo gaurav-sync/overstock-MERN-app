@@ -1,56 +1,23 @@
-let cart = null;
+const mongoose= require("mongoose");
 
-
-
-module.exports = class Cart {
-
-    static save(product) {
-
-        if (cart === null) {
-            cart = { products: [], totalPrice: 0 };
-
-
-
+const cartSchema=mongoose.Schema({
+    user:{
+        type:mongoose.ObjectId,
+        ref:"user"
+    },
+    cartItems:[{
+        product:{
+            type:mongoose.ObjectId,
+            ref:"product"
+        },
+        quantity:{
+            type:Number,
+            requride:true
         }
-
-        const existingProductIndex = cart.products.findIndex(p => p.id == product.id);
-        
-        
-        
-        // to check product is existing in cart
-        if (existingProductIndex >= 0) { 
-            
-            // exist in cart already
-            const exsitingProduct = cart.products[existingProductIndex];
-            exsitingProduct.qty += 1;
-        } else { 
-            
-            
-            //not exist
-            product.qty = 1;
-            cart.products.push(product);
+    }]
+})
 
 
-        }
+const CartModel=mongoose.model("Cart",cartSchema);
 
-        cart.totalPrice += product.price;
-    }
-
-
-    static getCart() {
-        return cart;
-    }
-
-
-
-    static delete(productId)
-    
-    {
-
-        const isExisting = cart.products.findIndex(p => p.id == productId);
-        if (isExisting >= 0) {
-            cart.products.splice(isExisting, 1);
-        }
-    }
-
-}
+module.exports={CartModel};
