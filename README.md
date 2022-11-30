@@ -5,7 +5,7 @@ Overstock.com Inc. is an online retailer and technology company. The Company is 
 ## Team Project | Duration (1 Week)
 
 ## Tech Stack 
-### `ReactJs` , `Redux`, `CSS`, `Chakra-UI`, `Heroku` , `Rest API`
+### `ReactJs` , `Redux`, `CSS`, `Chakra-UI` , `Rest API` , `Express JS` , `Node JS` , `Mongo DB` , `Mongoose` , `Atlas` , `Render` 
 
 ## Home Page (Landing Page)
 <img src="https://user-images.githubusercontent.com/96625397/200256356-e72a1993-8d54-4b4b-9984-2d1ffcc2a7d6.png" alt="landing page" />
